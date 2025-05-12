@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/screens/IntroScreen.dart';
+import 'package:reddit_clone/utils/bottombar.dart';
+import 'package:reddit_clone/utils/homescreenconst.dart';
 
 class HomePageUI extends StatefulWidget {
   const HomePageUI({super.key});
@@ -12,23 +16,10 @@ class _HomePageUIState extends State<HomePageUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              Text(
-                "data",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: appBar,
+      drawer: AppDrawer,
+      bottomNavigationBar: BottomNavBar(),
+      body: ListView(),
     );
   }
 }
