@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 final List join_communities = [
   'Ask',
@@ -21,36 +20,9 @@ final List join_communities = [
   "Memes",
 ];
 
-AppBar appBar = AppBar(
-  backgroundColor: Colors.transparent,
-  title: Text(
-    "reddit",
-    style: TextStyle(
-      color: Colors.deepOrange,
-      fontSize: 25,
-      fontWeight: FontWeight.bold,
-    ),
-  ),
-
-  actions: [
-    IconButton(
-      onPressed: () {},
-      icon: Icon(CupertinoIcons.search, color: Colors.white),
-    ),
-    Padding(
-      padding: const EdgeInsets.only(right: 10, left: 5),
-      child: Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Reddit-Logo-png.png'),
-          ),
-        ),
-      ),
-    ),
-  ],
-);
+//
+// DRAWER
+//
 Drawer AppDrawer = Drawer(
   backgroundColor: Colors.black,
   shadowColor: Colors.white,
@@ -78,7 +50,7 @@ Drawer AppDrawer = Drawer(
             return ListTile(
               leading: Image.asset('assets/images/Reddit-Logo-png.png'),
               title: Text(
-                "r/" + join_communities[index].toString(),
+                "r/${join_communities[index]}",
                 style: TextStyle(color: Colors.white),
               ),
               trailing: IconButton(
@@ -94,4 +66,3 @@ Drawer AppDrawer = Drawer(
 );
 
 // BOTTOM BAR
-

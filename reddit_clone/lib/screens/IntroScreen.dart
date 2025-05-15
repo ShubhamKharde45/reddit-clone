@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit_clone/screens/homepagescreen.dart';
 
 class IntroscreenUI extends StatefulWidget {
-  IntroscreenUI({super.key});
+  const IntroscreenUI({super.key});
 
   @override
   State<IntroscreenUI> createState() => _IntroscreenUIState();
@@ -33,7 +33,7 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Center(
-          child: Container(
+          child: SizedBox(
             height: 600,
             width: MediaQuery.of(context).size.width,
             child: Padding(
