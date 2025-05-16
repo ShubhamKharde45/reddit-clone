@@ -75,8 +75,6 @@ class _LoginScreenUIState extends ConsumerState<LoginScreenUI> {
           UserPublicUUID: userpublicUUID,
           UserStatus: isActive,
         );
-
-    print(ref.watch(UserNotifierProvider)?.UserName);
   }
 
   @override

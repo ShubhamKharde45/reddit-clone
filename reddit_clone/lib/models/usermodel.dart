@@ -17,6 +17,6 @@ class User {
       UserEmail: email ?? UserEmail,
       UserPublicUUID: UserPublicUUID,
       UserStatus: status ?? UserStatus,
-    );
+    );  
   }
 }
