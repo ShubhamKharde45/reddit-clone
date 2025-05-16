@@ -1,13 +1,14 @@
-package com.example.reddit_clone.Entity;
+package com.example.reddit_clone.entity;
 
-import com.example.reddit_clone.Class.User;
+import com.example.reddit_clone.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-
     boolean existsByUserPublicUUIDAndUserEmail(String userPublicUUID, String userEmail);
+    User findByUserPublicUUID(String userPublicUUID);
+    boolean existsByUserEmailAndUserPassword(String email, String password);
 
-    Optional findByUserName(String postUserName);
+    User findByUserEmail(String email);
 }

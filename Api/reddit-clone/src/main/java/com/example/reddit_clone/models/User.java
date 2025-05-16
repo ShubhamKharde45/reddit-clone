@@ -1,14 +1,12 @@
-package com.example.reddit_clone.Class;
+package com.example.reddit_clone.models;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @Getter
@@ -18,7 +16,7 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String userName;
@@ -30,6 +28,12 @@ public class User {
     @Column(nullable = false, unique = true)
     private String userPublicUUID;
 
+    @Column(nullable = false)
+    private boolean userStatus;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<Post>();
+
+    @ManyToMany(mappedBy = "members")
+    private List<Community> communities = new ArrayList<>();
 }

@@ -41,12 +41,20 @@ class _HomePageUIState extends State<HomePageUI> {
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 10, left: 5),
-              child: Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/Reddit-Logo-png.png'),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreenUI()),
+                  );
+                },
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/Reddit-Logo-png.png'),
+                    ),
                   ),
                 ),
               ),

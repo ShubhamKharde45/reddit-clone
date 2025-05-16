@@ -1,10 +1,8 @@
-package com.example.reddit_clone.Entity;
+package com.example.reddit_clone.entity;
 
-import com.example.reddit_clone.Class.User;
+import com.example.reddit_clone.models.Community;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface CommunityRepository extends JpaRepository<CommunityRepository, Long> {
+public interface CommunityRepository extends JpaRepository<Community, Long> {
 
 }

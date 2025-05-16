@@ -1,4 +1,4 @@
-package com.example.reddit_clone.Class;
+package com.example.reddit_clone.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -22,16 +21,12 @@ public class Post {
     private String PostDescription;
     private String PostTime;
 
-    private List<String> PostAttachmentType;
+    private String PostAttachmentType;
 
-
-    private List<String> PostAttachmentsUrl;
+    private String PostAttachmentsUrl;
 
     private String PostUserName;
     private int PostLikesCount;
-    private int PostCommentsCount;
-
-    private List<String> PostComments;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

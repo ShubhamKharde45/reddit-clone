@@ -1,16 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/screens/homepagescreen.dart';
+import 'package:reddit_clone/auth/authmanager.dart';
+import 'package:reddit_clone/screens/loginscreen.dart';
+import 'package:reddit_clone/utils/appflatbtn.dart';
+import 'package:reddit_clone/utils/apptextfield.dart';
 
-class IntroscreenUI extends StatefulWidget {
-  const IntroscreenUI({super.key});
+class SignupscreenUI extends StatefulWidget {
+  const SignupscreenUI({super.key});
 
   @override
-  State<IntroscreenUI> createState() => _IntroscreenUIState();
+  State<SignupscreenUI> createState() => _SignupscreenUIState();
 }
 
-class _IntroscreenUIState extends State<IntroscreenUI> {
+class _SignupscreenUIState extends State<SignupscreenUI> {
   bool isConditionsChecked = false;
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController usernamecontroller = TextEditingController();
+  final TextEditingController passcontroller = TextEditingController();
+  final TextEditingController confirmpasscontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    emailcontroller.dispose();
+    usernamecontroller.dispose();
+    passcontroller.dispose();
+    confirmpasscontroller.dispose();
+    super.dispose();
+  }
+
+  void signup() async {
+    if (isConditionsChecked == true) {
+      if (passcontroller.text.trim() == confirmpasscontroller.text.trim()) {
+        final response = await AuthManager().SignUp(
+          username: usernamecontroller.text.trim(),
+          email: emailcontroller.text.trim(),
+          password: passcontroller.text.trim(),
+        );
+        if (response == "Error") {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Invalid credentials")));
+        } else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => LoginScreenUI()),
+            (route) => false,
+          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Account created.")));
+        }
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Password does not matched.")));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please accsept terms&conditions first.")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +70,8 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
         backgroundColor: Colors.transparent,
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomePageUI()),
-              );
-            },
-            icon: Icon(CupertinoIcons.forward, color: Colors.white, size: 25),
+            onPressed: () {},
+            icon: Icon(CupertinoIcons.settings, color: Colors.white, size: 25),
           ),
         ],
       ),
@@ -34,7 +79,7 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
       body: SafeArea(
         child: Center(
           child: SizedBox(
-            height: 600,
+            height: 800,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -48,7 +93,6 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
-                          // color: Colors.yellowAccent,
                           image: DecorationImage(
                             image: AssetImage(
                               'assets/images/Reddit-Logo-png.png',
@@ -64,7 +108,7 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Login to Reddit",
+                        "Let's create an account",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 30,
@@ -73,74 +117,38 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
                       ),
                     ],
                   ),
+
                   SizedBox(height: 35),
                   Column(
                     children: [
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            CupertinoIcons.profile_circled,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Continue with mobile number",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                      Apptextfield(
+                        hintext: "Username",
+                        controller: usernamecontroller,
                       ),
                       SizedBox(height: 15),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            CupertinoIcons.profile_circled,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Continue with Google",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                      Apptextfield(
+                        hintext: "Email",
+                        controller: emailcontroller,
                       ),
-                      SizedBox(height: 15),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            CupertinoIcons.profile_circled,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Use email and pasword",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                      SizedBox(height: 5),
+                      Apptextfield(
+                        hintext: "Password",
+                        controller: passcontroller,
+                      ),
+                      SizedBox(height: 5),
+                      Apptextfield(
+                        hintext: "Confirm password",
+                        controller: confirmpasscontroller,
                       ),
                     ],
                   ),
-                  Expanded(child: SizedBox()),
+                  SizedBox(height: 50),
+                  Appflatbtn(
+                    text: "LogIn",
+                    onTap: () {
+                      signup();
+                    },
+                  ),
                   Row(
                     children: [
                       Checkbox(
@@ -175,10 +183,18 @@ class _IntroscreenUIState extends State<IntroscreenUI> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account?",
+                        "Already have an account?",
                         style: TextStyle(color: Colors.white54),
                       ),
-                      Text(" Sign up", style: TextStyle(color: Colors.white)),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          " LogIn",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
                 ],

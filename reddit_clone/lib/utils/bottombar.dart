@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/screens/chatscreen.dart';
 import 'package:reddit_clone/screens/createscreen.dart';
 import 'package:reddit_clone/screens/homepagescreen.dart';
 
@@ -34,6 +35,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => CreateScreen()),
+          );
+          setState(() {
+            selectedTab = value;
+          });
+        }
+        if (value == 3) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatScreen()),
           );
           setState(() {
             selectedTab = value;
