@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Infobartext extends StatelessWidget {
-  const Infobartext({required this.text, required this.text2});
+  const Infobartext({super.key, required this.text, required this.text2});
 
   final String text2;
   final String text;
